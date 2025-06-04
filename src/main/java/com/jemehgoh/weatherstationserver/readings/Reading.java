@@ -1,5 +1,6 @@
 package com.jemehgoh.weatherstationserver.readings;
 
-public record Reading(double temperature, double pressure) {
+public record Reading(String time, double temperature, double pressure, double humidity,
+        int co2Ppm, int tvoc) {
 
 }
