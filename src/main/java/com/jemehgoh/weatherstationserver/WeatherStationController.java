@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A REST controller that handles HTTP requests to the server.
@@ -24,10 +26,24 @@ public class WeatherStationController {
         return "ESP32 weather station";
     }
 
-    // Returns a JSON of the first reading in the reading list
+    /**
+     *
+     * @param count the number of readings requested.
+     * @param startsFromTop if the list is ascending or descending
+     * @return a list of the first or last count readings, or the entire list, whichever is smaller.
+     */
     @GetMapping(value = "/readings", produces = "application/json")
-    public ArrayList<Reading> getReadings() {
-        return readings;
+    public List<Reading> getReadings(@RequestParam(name = "count", defaultValue = "10") int count,
+            @RequestParam(name = "startsFromTop", defaultValue = "true") boolean startsFromTop) {
+        if (count >= readings.size()) {
+            return readings;
+        }
+
+        if (startsFromTop) {
+            return readings.subList(0, count);
+        }
+
+        return readings.subList((readings.size() - count), readings.size()).reversed();
     }
 
     // Receives sensor data from the ESP32 through HTTP POST requests
