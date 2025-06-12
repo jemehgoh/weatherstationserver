@@ -16,8 +16,19 @@ The weather station comprises three components, namely:
 
 The sensor data is sent from the ESP32 to the local server using Wi-Fi. 
 
-## Requirements
+## Quick start
 
-* Java 21
+1. Ensure that you have Java 21 or above installed.
+
+2. Download the latest version of `WeatherStationServer` from [here](https://github.com/jemehgoh/weatherstationserver/releases) 
+
+3. Copy the JAR into a new folder
+
+4. Connect your computer to the Wi-Fi network you have set up your ESP32 to connect to. 
+
+5. Open a terminal in folder your JAR is in, and run the program with the following command: 
+```
+java -jar weather-station-server
+```
 
 
